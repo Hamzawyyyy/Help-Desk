@@ -7,6 +7,12 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    # Temporary until Member 2 adds the User model and authentication.
+    return None
+
+
 def create_app(test_config=None):
     app = Flask(__name__)
     app.config.from_object(Config)

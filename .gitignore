@@ -7,3 +7,4 @@ instance/
 *.db
 .coverage
 .vscode/
+venv/

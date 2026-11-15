@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Register · HelpDesk{% endblock %}
+{% block content %}
+<h1>Create an account</h1>
+<form method="post" class="col-md-6">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label class="form-label" for="username">Username</label>
+<input class="form-control mb-3" id="username" name="username" required minlength="3" maxlength="80" value="{{ request.form.get('username', '') }}" autocomplete="username">
+<label class="form-label" for="email">Email</label>
+<input class="form-control mb-3" id="email" name="email" type="email" required maxlength="254" value="{{ request.form.get('email', '') }}" autocomplete="email">
+<label class="form-label" for="password">Password (8–128 characters)</label>
+<input class="form-control mb-3" id="password" name="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password">
+<button class="btn btn-primary">Register</button>
+</form>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Home · HelpDesk{% endblock %}
 {% block content %}
-<h1>HelpDesk</h1>
-<p class="lead">Support Ticket Management System</p>
-<p>This is the shared project foundation. Feature pages will be added through pull requests.</p>
+<h1>HelpDesk</h1><p class="lead">Support Ticket Management System</p>
+{% if current_user.is_authenticated %}<a class="btn btn-primary" href="{{ url_for('tickets.list_tickets') }}">View tickets</a> <a class="btn btn-outline-primary" href="{{ url_for('tickets.create_ticket') }}">Create ticket</a>
+{% else %}<p>Log in or register to create and track your support tickets.</p><a class="btn btn-primary" href="{{ url_for('auth.login') }}">Log in</a> <a class="btn btn-outline-primary" href="{{ url_for('auth.register') }}">Register</a>{% endif %}
 {% endblock %}

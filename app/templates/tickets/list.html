@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Tickets · HelpDesk{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>Tickets</h1><a class="btn btn-primary" href="{{ url_for('tickets.create_ticket') }}">Create ticket</a></div>
+<p>{% if current_user.role == 'user' %}Your support tickets.{% else %}All support tickets.{% endif %}</p>
+{% if page.items %}
+<div class="table-responsive"><table class="table table-striped align-middle">
+<thead><tr><th scope="col">Ticket</th><th scope="col">Category</th><th scope="col">Priority</th><th scope="col">Status</th><th scope="col">Creator</th><th scope="col">Created (UTC)</th></tr></thead>
+<tbody>{% for ticket in page.items %}<tr><td><a href="{{ url_for('tickets.ticket_detail', ticket_id=ticket.id) }}">#{{ ticket.id }} {{ ticket.title }}</a></td><td>{{ ticket.category }}</td><td>{{ ticket.priority }}</td><td>{{ ticket.status }}</td><td>{{ ticket.creator.username }}</td><td>{{ ticket.created_at.strftime('%Y-%m-%d %H:%M') }}</td></tr>{% endfor %}</tbody>
+</table></div>
+<nav aria-label="Ticket pages" class="d-flex gap-3">{% if page.has_prev %}<a href="{{ url_for('tickets.list_tickets', page=page.prev_num) }}">Previous</a>{% endif %}<span>Page {{ page.page }} of {{ page.pages }}</span>{% if page.has_next %}<a href="{{ url_for('tickets.list_tickets', page=page.next_num) }}">Next</a>{% endif %}</nav>
+{% else %}<div class="alert alert-info">No tickets yet. Create your first ticket to get started.</div>{% endif %}
+{% endblock %}

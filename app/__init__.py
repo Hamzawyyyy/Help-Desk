@@ -46,6 +46,8 @@ def create_app(test_config=None):
 
     from app.routes.auth import auth
     app.register_blueprint(auth)
+    from app.routes.tickets import tickets
+    app.register_blueprint(tickets)
 
     @app.cli.command("init-db")
     def init_db():

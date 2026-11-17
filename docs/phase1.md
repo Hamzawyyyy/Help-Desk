@@ -14,7 +14,9 @@ contribution is fabricated.
 - Prerequisite: [Issue #2](https://github.com/Hamzawyyyy/Help-Desk/issues/2),
   branch `feature/user-auth`, [PR #4](https://github.com/Hamzawyyyy/Help-Desk/pull/4).
 - Member 3 Feature 1: [Issue #3](https://github.com/Hamzawyyyy/Help-Desk/issues/3),
-  branch `feature/ticket-creation`, separate linked PR.
+  branch `feature/ticket-creation`, [PR #5](https://github.com/Hamzawyyyy/Help-Desk/pull/5).
+- Member 3 Feature 2: [Issue #6](https://github.com/Hamzawyyyy/Help-Desk/issues/6),
+  branch `feature/ticket-edit-assign`, separate linked PR.
 - Implementation and tests/documentation are recorded in focused commits.
 - CI uses Python 3.12 and runs on both pushes and PRs.
 - The repository owner is the final tester. Automated checks and implementation
@@ -29,6 +31,16 @@ anonymous requests; nonexistent and malformed IDs; CSRF; HTML escaping;
 permission-aware pagination; and preserving fields after validation errors.
 `tests/test_auth.py` covers the authentication prerequisite. Tests use isolated,
 temporary SQLite databases rather than the demo database.
+
+## Editing and assignment acceptance checks
+
+`tests/test_ticket_edit_assign.py` verifies owner/staff edits, required fields and
+validation failures without persistence, denied edits, staff-only assignment and
+unassignment, invalid/non-support agent IDs, saved relationships/timestamps,
+CSRF, missing tickets and HTML escaping. Protected creator/status/creation time
+and assignment fields cannot be overwritten through editing. No schema change
+or status/history logging is introduced. The README documents permissions and
+manual demo steps. Automated/self-review evidence does not imply owner testing.
 
 ## Current schema contract
 
@@ -50,8 +62,8 @@ Role management and schema migration tooling remain separate team work.
 
 ## Later work
 
-Member 3 Feature 2 (editing/assignment) has not started. Keep it in its own branch
-from the latest main after Feature 1 merges. Members 1, 2, 4, and 5 should continue
+Member 3 Feature 2 (editing/assignment) follows merged Feature 1 on its own
+branch and linked PR. Members 1, 2, 4, and 5 should continue
 their agreed responsibilities and avoid duplicating the shared models.
 The Phase 2 requirements for two features per student, comprehensive specifications,
 UML, milestones, Scrum notes, deployment pipeline and live deployment are not claimed

@@ -70,10 +70,51 @@ Ticket endpoints: `GET /tickets`, `GET /tickets/new`, `POST /tickets/new`, and
 IDs. POSTs require a valid session CSRF token. List queries apply permissions
 before pagination. Templates extend the existing Bootstrap layout.
 
-Editing, assignment workflows, comments, status transitions, history, and deployment
-remain future work. The nullable assignment field prepares the agreed shared
-schema without implementing Feature 2. Coordinate schema changes with Members 2
+Comments, status transitions, history, and deployment remain future work.
+Editing and assignment use the existing shared schema; no database migration is needed. Coordinate schema changes with Members 2
 and 4; `init-db` is not a migration system.
 
 See [Phase 1 evidence and handover](docs/phase1.md) for implementation boundaries,
 acceptance checks and the remaining team requirements.
+
+
+## Ticket editing and assignment
+
+- Regular users can edit their own title, description, category and priority.
+- Support and admins can edit any ticket. Other users' edit URLs return 404;
+  unknown roles receive 403. Anonymous requests redirect to login.
+- Support and admins can assign a ticket to a user whose current role is
+  `support`, or choose **Unassigned**. Regular users cannot change assignments.
+- Updates preserve the creator, original creation time and status. Assignment
+  cannot be changed through the edit form. Successful changes update `updated_at`
+  in UTC; unchanged submissions need not change the timestamp.
+- The details page displays the assigned agent and last update time. Staff see
+  an assignment selector; all authorized viewers see the edit link.
+- Validation uses the same required fields, length limits and choices as creation.
+  Invalid submissions return 400 without changing the ticket. POSTs require CSRF.
+
+Endpoints: `GET/POST /tickets/<id>/edit` and `POST /tickets/<id>/assign`.
+The assignment form sends `assigned_to_id`: an existing support-agent ID, or an
+empty string to unassign. Missing, malformed, nonexistent and non-support IDs
+are rejected. No status transition or activity-history feature is added here.
+
+Manual demo: create a ticket, open its details, select **Edit ticket**, change the
+priority/description, and save. Verify the changes and original creator/status.
+A second regular account cannot access the edit URL. To exercise assignment,
+use a trusted existing support/admin account. There is no public role-promotion
+form. A local developer can deliberately configure a previously registered demo
+account using `python -m flask --app run shell` inside the virtual environment:
+
+```python
+from app import db
+from app.models import User
+agent = db.session.scalar(db.select(User).where(User.username == "your_agent_username"))
+assert agent is not None
+agent.role = "support"
+db.session.commit()
+```
+
+Only use a known account in your local demo database. Log in as that support
+account, open the ticket, assign it, then unassign it. Check the persisted result
+as the creator. `tests/test_ticket_edit_assign.py` covers these workflows and
+failure cases with temporary databases and staff fixtures.

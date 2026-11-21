@@ -54,3 +54,13 @@ def test_init_db_command(app):
     result = app.test_cli_runner().invoke(args=["init-db"])
     assert result.exit_code == 0
     assert "Database tables created" in result.output
+
+
+@pytest.mark.parametrize("path", [
+    "/auth/register", "/auth/login", "/auth/logout", "/tickets/new",
+    "/tickets/1/edit", "/tickets/1/assign",
+])
+def test_non_ascii_csrf_rejected(client, path):
+    client.get("/auth/login")
+    response = client.post(path, data={"csrf_token": "invalid-\u00e9-token"})
+    assert response.status_code == 400

@@ -41,7 +41,7 @@ def create_app(test_config=None):
         if app.config["CSRF_ENABLED"] and request.method == "POST":
             expected = session.get("csrf_token", "")
             supplied = request.form.get("csrf_token", "")
-            if not expected or not hmac.compare_digest(expected, supplied):
+            if not expected or not supplied.isascii() or not hmac.compare_digest(expected, supplied):
                 abort(400, description="Invalid form token. Reload the page and try again.")
 
     from app.routes.auth import auth

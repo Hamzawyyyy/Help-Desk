@@ -16,7 +16,7 @@ contribution is fabricated.
 - Member 3 Feature 1: [Issue #3](https://github.com/Hamzawyyyy/Help-Desk/issues/3),
   branch `feature/ticket-creation`, [PR #5](https://github.com/Hamzawyyyy/Help-Desk/pull/5).
 - Member 3 Feature 2: [Issue #6](https://github.com/Hamzawyyyy/Help-Desk/issues/6),
-  branch `feature/ticket-edit-assign`, separate linked PR.
+  branch `feature/ticket-edit-assign`, [PR #7](https://github.com/Hamzawyyyy/Help-Desk/pull/7).
 - Implementation and tests/documentation are recorded in focused commits.
 - CI uses Python 3.12 and runs on both pushes and PRs.
 - The repository owner is the final tester. Automated checks and implementation
@@ -68,3 +68,39 @@ their agreed responsibilities and avoid duplicating the shared models.
 The Phase 2 requirements for two features per student, comprehensive specifications,
 UML, milestones, Scrum notes, deployment pipeline and live deployment are not claimed
 as completed by this Phase 1 change. No meeting summaries or dates are invented.
+
+
+## November 20 integration session: performed November 21, 2026
+
+The session was completed on November 21; no earlier execution is claimed.
+Baseline main was `a5950f3` (merged PR #7), with a clean local checkout, no
+new teammate changes, and no open Issues or PRs at inspection. Its 78 tests
+passed on Python 3.12.10 and its latest GitHub Actions run was successful.
+
+The integration review reproduced a shared CSRF defect: a non-ASCII submitted
+form token raised TypeError in the string comparison, causing a server error
+instead of rejecting the form. The fix rejects non-ASCII tokens with HTTP 400.
+Six regression cases exercise authentication, logout, creation, editing and
+assignment POST endpoints. Work is tracked in
+[Issue #8](https://github.com/Hamzawyyyy/Help-Desk/issues/8) and its linked PR
+on `fix/phase1-integration`.
+
+`tests/test_workflow_http.py` runs the documented demo over real localhost HTTP
+with separate cookie sessions and a disposable SQLite database. It covers actual
+registration/login, creation, owner editing, another user's denied access,
+support assignment/unassignment, creator-visible assignment, logout, invalid
+CSRF input and persisted relationships. Support setup is deliberate test-only
+role configuration matching the README. No production database, real accounts,
+or owner manual testing are used or claimed.
+
+Validation after the fix: **85 tests passed** on Python 3.12.10, including the
+real-HTTP journey and all six Unicode-token regression cases.
+
+Reproduce with `python -m pytest -q`; run just the HTTP journey with
+`python -m pytest -q tests/test_workflow_http.py`. The integration work does not
+complete GitHub Projects setup or the other members' individual contributions.
+At inspection, `git shortlog -sne origin/main` showed only one Git author
+(Hamza Hossam). Projects access remains unverified: no Projects connector tools
+are available, and previously declined browser access was not bypassed.
+The November 23 readiness session should recheck these remaining requirements
+before the November 24 target.

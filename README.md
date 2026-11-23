@@ -118,3 +118,6 @@ Only use a known account in your local demo database. Log in as that support
 account, open the ticket, assign it, then unassign it. Check the persisted result
 as the creator. `tests/test_ticket_edit_assign.py` covers these workflows and
 failure cases with temporary databases and staff fixtures.
+
+For the November 24 target, see the [Phase 1 readiness snapshot](docs/phase1-readiness.md)
+for demo steps, contribution/merge evidence and outstanding team requirements.

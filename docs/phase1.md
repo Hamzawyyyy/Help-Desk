@@ -104,3 +104,10 @@ At inspection, `git shortlog -sne origin/main` showed only one Git author
 are available, and previously declined browser access was not bypassed.
 The November 23 readiness session should recheck these remaining requirements
 before the November 24 target.
+
+## November 23 readiness review
+
+See [the readiness snapshot](phase1-readiness.md) for reproducible demo steps,
+verified feature/merge evidence, automated checks, and the remaining November 24
+owner/team checklist tracked in Issue #10. Member 3's completed features do not
+establish overall team Phase 1 completion.

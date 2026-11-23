@@ -16,11 +16,11 @@ was identified separately below. The full Python 3.12.10 suite passed again:
 
 | Work / source branch | Issue and merged PR | PR head / merge commit |
 |---|---|---|
-| Foundation: `setup/project-foundation` | [PR #1](https://github.com/Hamzawyyyy/Help-Desk/pull/1) | `9927d31` / `9413ab1` |
-| Authentication prerequisite: `feature/user-auth` | [Issue #2](https://github.com/Hamzawyyyy/Help-Desk/issues/2), [PR #4](https://github.com/Hamzawyyyy/Help-Desk/pull/4) | `86cb829` / `3f5bcb8` |
-| Member 3 Feature 1: `feature/ticket-creation` | [Issue #3](https://github.com/Hamzawyyyy/Help-Desk/issues/3), [PR #5](https://github.com/Hamzawyyyy/Help-Desk/pull/5) | `a260f50` / `a17cefe` |
-| Member 3 Feature 2: `feature/ticket-edit-assign` | [Issue #6](https://github.com/Hamzawyyyy/Help-Desk/issues/6), [PR #7](https://github.com/Hamzawyyyy/Help-Desk/pull/7) | `5b7e030` / `a5950f3` |
-| Integration fix: `fix/phase1-integration` | [Issue #8](https://github.com/Hamzawyyyy/Help-Desk/issues/8), [PR #9](https://github.com/Hamzawyyyy/Help-Desk/pull/9) | `bd689d1` / `a7ffedc` |
+| Foundation: [`setup/project-foundation`](https://github.com/Hamzawyyyy/Help-Desk/tree/setup/project-foundation) | [PR #1](https://github.com/Hamzawyyyy/Help-Desk/pull/1) | [`9927d31`](https://github.com/Hamzawyyyy/Help-Desk/commit/9927d31) / [`9413ab1`](https://github.com/Hamzawyyyy/Help-Desk/commit/9413ab1) |
+| Authentication prerequisite: [`feature/user-auth`](https://github.com/Hamzawyyyy/Help-Desk/tree/feature/user-auth) | [Issue #2](https://github.com/Hamzawyyyy/Help-Desk/issues/2), [PR #4](https://github.com/Hamzawyyyy/Help-Desk/pull/4) | [`86cb829`](https://github.com/Hamzawyyyy/Help-Desk/commit/86cb829) / [`3f5bcb8`](https://github.com/Hamzawyyyy/Help-Desk/commit/3f5bcb8) |
+| Member 3 Feature 1: [`feature/ticket-creation`](https://github.com/Hamzawyyyy/Help-Desk/tree/feature/ticket-creation) | [Issue #3](https://github.com/Hamzawyyyy/Help-Desk/issues/3), [PR #5](https://github.com/Hamzawyyyy/Help-Desk/pull/5) | [`a260f50`](https://github.com/Hamzawyyyy/Help-Desk/commit/a260f50) / [`a17cefe`](https://github.com/Hamzawyyyy/Help-Desk/commit/a17cefe) |
+| Member 3 Feature 2: [`feature/ticket-edit-assign`](https://github.com/Hamzawyyyy/Help-Desk/tree/feature/ticket-edit-assign) | [Issue #6](https://github.com/Hamzawyyyy/Help-Desk/issues/6), [PR #7](https://github.com/Hamzawyyyy/Help-Desk/pull/7) | [`5b7e030`](https://github.com/Hamzawyyyy/Help-Desk/commit/5b7e030) / [`a5950f3`](https://github.com/Hamzawyyyy/Help-Desk/commit/a5950f3) |
+| Integration fix: [`fix/phase1-integration`](https://github.com/Hamzawyyyy/Help-Desk/tree/fix/phase1-integration) | [Issue #8](https://github.com/Hamzawyyyy/Help-Desk/issues/8), [PR #9](https://github.com/Hamzawyyyy/Help-Desk/pull/9) | [`bd689d1`](https://github.com/Hamzawyyyy/Help-Desk/commit/bd689d1) / [`a7ffedc`](https://github.com/Hamzawyyyy/Help-Desk/commit/a7ffedc) |
 
 Each listed PR was verified as merged. Its commits, changes and merge date are
 available in the linked PR. Member 3's two required features have separate
@@ -71,7 +71,7 @@ The full suite additionally covers role failures, invalid/missing IDs, validatio
 boundaries, server-controlled fields, CSRF and escaped HTML.
 
 Contribution evidence beyond main: [commit 9cc75ae](https://github.com/Hamzawyyyy/Help-Desk/commit/9cc75ae29a70b91f47a7e8346339d71c840b9ae7)
-by `heshamhabiba277-dot` on `feature/test-setup` (November 3) adds `pytest.ini`,
+by `heshamhabiba277-dot` on [feature/test-setup](https://github.com/Hamzawyyyy/Help-Desk/tree/feature/test-setup) (November 3) adds `pytest.ini`,
 test fixtures and a `.gitignore` change. It is unmerged and has no PR. Preserve
 this real authorship; confirm the account's team-member identity and reconcile
 its fixtures with current main before integration. Across fetched branches there

@@ -1,7 +1,30 @@
 {% extends 'base.html' %}
 {% block title %}Home · HelpDesk{% endblock %}
 {% block content %}
-<h1>HelpDesk</h1><p class="lead">Support Ticket Management System</p>
-{% if current_user.is_authenticated %}<a class="btn btn-primary" href="{{ url_for('tickets.list_tickets') }}">View tickets</a> <a class="btn btn-outline-primary" href="{{ url_for('tickets.create_ticket') }}">Create ticket</a>
-{% else %}<p>Log in or register to create and track your support tickets.</p><a class="btn btn-primary" href="{{ url_for('auth.login') }}">Log in</a> <a class="btn btn-outline-primary" href="{{ url_for('auth.register') }}">Register</a>{% endif %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
+  <h1 class="display-5 fw-bold">HelpDesk</h1>
+  <p class="lead">Support Ticket Management System — report a problem, follow its progress, get it solved.</p>
+  {% if current_user.is_authenticated %}
+  {% if has_endpoint('member1_frontend.dashboard') %}
+  <a class="btn btn-primary btn-lg" href="{{ url_for('member1_frontend.dashboard') }}">Go to dashboard</a>
+  {% endif %}
+  <a class="btn btn-outline-primary btn-lg" href="{{ url_for('tickets.list_tickets') }}">View tickets</a>
+  <a class="btn btn-outline-primary btn-lg" href="{{ url_for('tickets.create_ticket') }}">Create ticket</a>
+  {% else %}
+  <p>Log in or register to create and track your support tickets.</p>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}">Log in</a>
+  <a class="btn btn-outline-primary btn-lg" href="{{ url_for('auth.register') }}">Register</a>
+  {% endif %}
+</div>
+<div class="row g-4">
+  <div class="col-md-4"><div class="card h-100"><div class="card-body">
+    <h2 class="h5">1. Report</h2><p class="mb-0 text-muted">Create a ticket with a title, description, category and priority.</p>
+  </div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body">
+    <h2 class="h5">2. Track</h2><p class="mb-0 text-muted">See its status, the assigned agent and every update in one place.</p>
+  </div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body">
+    <h2 class="h5">3. Resolve</h2><p class="mb-0 text-muted">Support agents work the ticket and talk to you through comments.</p>
+  </div></div></div>
+</div>
 {% endblock %}

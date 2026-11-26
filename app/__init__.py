@@ -50,6 +50,8 @@ def create_app(test_config=None):
     app.register_blueprint(tickets)
     from app import member2_auth
     member2_auth.init_app(app)
+    from app import member4_workflow
+    member4_workflow.init_app(app)
 
     @app.cli.command("init-db")
     def init_db():

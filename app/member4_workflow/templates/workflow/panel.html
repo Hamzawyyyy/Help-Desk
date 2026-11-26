@@ -1,0 +1,28 @@
+{# Member 4 — shown at the bottom of the ticket page #}
+{% if current_user.role in ('support', 'admin') and allowed_next_statuses(ticket) %}
+<section class="mb-4" aria-labelledby="status-heading">
+<h2 id="status-heading" class="h4">Change status</h2>
+<div class="d-flex flex-wrap gap-2">
+{% for next_status in allowed_next_statuses(ticket) %}
+<form method="post" action="{{ url_for('member4_workflow.change_status', ticket_id=ticket.id) }}">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<input type="hidden" name="status" value="{{ next_status }}">
+<button class="btn btn-sm {{ 'btn-success' if next_status == 'Resolved' else 'btn-outline-dark' }}">
+{{ 'Reopen' if ticket.status == 'Resolved' else 'Move to ' ~ next_status }}</button>
+</form>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+
+<section class="mb-4" aria-labelledby="history-heading">
+<h2 id="history-heading" class="h4">History</h2>
+<ul class="list-unstyled">
+{% for entry in ticket.history %}
+<li class="mb-2">{{ describe_history(entry) }}
+<div class="small text-muted">{{ entry.created_at.strftime('%Y-%m-%d %H:%M:%S') }} UTC</div></li>
+{% else %}
+<li class="text-muted">No changes recorded.</li>
+{% endfor %}
+</ul>
+</section>

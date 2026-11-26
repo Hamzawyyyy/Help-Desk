@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import status_badge, priority_badge %}
+{% block title %}Dashboard · HelpDesk{% endblock %}
+{% block content %}
+{% if stats is none %}
+<div class="alert alert-danger" role="alert">Your account role cannot use the dashboard.</div>
+{% else %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="mb-0">Dashboard</h1>
+  <a class="btn btn-primary" href="{{ url_for('tickets.create_ticket') }}">Create ticket</a>
+</div>
+<p class="text-muted">{% if current_user.role == 'user' %}A summary of your tickets.{% else %}A summary of all support tickets.{% endif %}</p>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="card stat-card h-100"><div class="card-body">
+      <div class="text-muted small">Total tickets</div><div class="display-6">{{ stats.total }}</div>
+    </div></div>
+  </div>
+  {% for status, count in stats.by_status.items() %}
+  <div class="col-6 col-lg-3">
+    <div class="card stat-card h-100"><div class="card-body">
+      <div class="small">{{ status_badge(status) }}</div><div class="display-6">{{ count }}</div>
+    </div></div>
+  </div>
+  {% endfor %}
+</div>
+
+{% if current_user.role in ('support', 'admin') %}
+<div class="row g-3 mb-4">
+  <div class="col-md-6"><div class="card h-100"><div class="card-body">
+    Assigned to me and not resolved: <strong>{{ stats.assigned_to_me }}</strong>
+  </div></div></div>
+  <div class="col-md-6"><div class="card h-100"><div class="card-body">
+    Waiting for an agent: <strong>{{ stats.unassigned }}</strong>
+  </div></div></div>
+</div>
+{% endif %}
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card h-100"><div class="card-body">
+      <h2 class="h5">By priority</h2>
+      <ul class="list-group list-group-flush">
+        {% for priority, count in stats.by_priority.items() %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">{{ priority_badge(priority) }}<span>{{ count }}</span></li>
+        {% endfor %}
+      </ul>
+    </div></div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card h-100"><div class="card-body">
+      <h2 class="h5">Latest tickets</h2>
+      {% if stats.recent %}
+      <div class="table-responsive"><table class="table align-middle mb-0">
+        <tbody>
+        {% for ticket in stats.recent %}
+          <tr>
+            <td><a href="{{ url_for('tickets.ticket_detail', ticket_id=ticket.id) }}">#{{ ticket.id }} {{ ticket.title }}</a></td>
+            <td>{{ priority_badge(ticket.priority) }}</td>
+            <td>{{ status_badge(ticket.status) }}</td>
+            <td class="small text-muted">{{ ticket.created_at.strftime('%Y-%m-%d') }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table></div>
+      <a class="d-inline-block mt-3" href="{{ url_for('tickets.list_tickets') }}">See all tickets</a>
+      {% else %}
+      <p class="text-muted mb-0">No tickets yet. <a href="{{ url_for('tickets.create_ticket') }}">Create the first one</a>.</p>
+      {% endif %}
+    </div></div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

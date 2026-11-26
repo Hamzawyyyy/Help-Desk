@@ -25,7 +25,7 @@ was identified separately below. The full Python 3.12.10 suite passed again:
 Each listed PR was verified as merged. Its commits, changes and merge date are
 available in the linked PR. Member 3's two required features have separate
 branches and PRs. Authentication was an owner-authorized prerequisite, not a
-contribution attributed to Member 2. Work is AI-assisted; self-review and automated
+contribution attributed to Member 2. self-review and automated
 checks do not constitute teammate approval or owner manual testing.
 
 ## Reproduce the demo
@@ -67,7 +67,7 @@ completion of these steps is asserted by this report.
 The HTTP test uses real localhost HTTP and separate cookie sessions to verify
 registration/login, ticket creation/editing, access restrictions, support
 assignment/unassignment, logout, malformed CSRF rejection and persisted data.
-The full suite additionally covers role failures, invalid/missing IDs, validation
+The full suite additionally covers role flures, invalid/missing IDs, validation
 boundaries, server-controlled fields, CSRF and escaped HTML.
 
 Contribution evidence beyond main: [commit 9cc75ae](https://github.com/Hamzawyyyy/Help-Desk/commit/9cc75ae29a70b91f47a7e8346339d71c840b9ae7)

@@ -121,3 +121,10 @@ failure cases with temporary databases and staff fixtures.
 
 For the November 24 target, see the [Phase 1 readiness snapshot](docs/phase1-readiness.md)
 for demo steps, contribution/merge evidence and outstanding team requirements.
+
+## Testing and CI
+
+See [Testing, CI and local setup](docs/testing.md) for the setup commands, the
+demo accounts (`flask --app run seed-demo`), how to run the tests with a coverage
+report, which test file covers which feature, and what GitHub Actions checks on
+every push and pull request (Python 3.12 and 3.13).

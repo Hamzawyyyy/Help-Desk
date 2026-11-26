@@ -15,6 +15,24 @@
 </section>
 {% endif %}
 
+<section class="mt-4 mb-4" aria-labelledby="comments-heading">
+<h2 id="comments-heading" class="h4">Comments ({{ ticket.comments|length }})</h2>
+{% for comment in ticket.comments %}
+<div class="border-start border-3 ps-3 mb-3 {{ 'border-warning' if comment.author.role in ('support', 'admin') else 'border-primary' }}">
+<div class="small text-muted"><strong>{{ comment.author.username }}</strong> · {{ comment.created_at.strftime('%Y-%m-%d %H:%M') }} UTC</div>
+<div class="text-break" style="white-space: pre-wrap">{{ comment.body }}</div>
+</div>
+{% else %}
+<p class="text-muted">No comments yet.</p>
+{% endfor %}
+<form method="post" action="{{ url_for('member4_workflow.add_comment', ticket_id=ticket.id) }}" class="col-lg-8">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label class="form-label" for="comment-body">Add a comment</label>
+<textarea class="form-control mb-2" id="comment-body" name="body" rows="3" maxlength="2000" required></textarea>
+<button class="btn btn-primary btn-sm">Add comment</button>
+</form>
+</section>
+
 <section class="mb-4" aria-labelledby="history-heading">
 <h2 id="history-heading" class="h4">History</h2>
 <ul class="list-unstyled">

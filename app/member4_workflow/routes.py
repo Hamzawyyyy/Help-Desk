@@ -27,3 +27,16 @@ def change_status(ticket_id):
     else:
         flash(f"Status changed to {ticket.status}.", "success")
     return redirect(url_for("tickets.ticket_detail", ticket_id=ticket.id))
+
+@bp.post("/tickets/<int:ticket_id>/comments")
+@login_required
+def add_comment(ticket_id):
+    require_ticket_role()
+    ticket = visible_ticket(ticket_id)   # users can only comment on their own tickets
+    try:
+        rules.add_comment(ticket, current_user, request.form.get("body"))
+    except rules.WorkflowError as error:
+        flash(str(error), "danger")
+    else:
+        flash("Comment added.", "success")
+    return redirect(url_for("tickets.ticket_detail", ticket_id=ticket.id))

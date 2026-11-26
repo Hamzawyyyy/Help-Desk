@@ -48,6 +48,8 @@ def create_app(test_config=None):
     app.register_blueprint(auth)
     from app.routes.tickets import tickets
     app.register_blueprint(tickets)
+    from app import member2_auth
+    member2_auth.init_app(app)
 
     @app.cli.command("init-db")
     def init_db():

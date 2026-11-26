@@ -16,4 +16,5 @@ def has_endpoint(name):
 
 
 def init_app(app):
+    from . import routes  # noqa: F401  (adds the dashboard page to bp)
     app.register_blueprint(bp)

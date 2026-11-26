@@ -1,0 +1,15 @@
+{# Member 1 — coloured badges that any page can import #}
+{% macro status_badge(status) -%}
+  {%- set colours = {"Open": "primary", "In Progress": "warning text-dark", "Resolved": "success"} -%}
+  <span class="badge bg-{{ colours.get(status, 'secondary') }}">{{ status }}</span>
+{%- endmacro %}
+
+{% macro priority_badge(priority) -%}
+  {%- set colours = {"Low": "secondary", "Medium": "info text-dark", "High": "danger"} -%}
+  <span class="badge bg-{{ colours.get(priority, 'secondary') }}">{{ priority }}</span>
+{%- endmacro %}
+
+{% macro role_badge(role) -%}
+  {%- set colours = {"admin": "warning text-dark", "support": "info text-dark", "user": "secondary"} -%}
+  <span class="badge bg-{{ colours.get(role, 'secondary') }}">{{ role }}</span>
+{%- endmacro %}

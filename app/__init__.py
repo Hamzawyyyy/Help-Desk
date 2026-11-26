@@ -52,6 +52,8 @@ def create_app(test_config=None):
     member2_auth.init_app(app)
     from app import member4_workflow
     member4_workflow.init_app(app)
+    from app import member1_frontend
+    member1_frontend.init_app(app)
 
     @app.cli.command("init-db")
     def init_db():

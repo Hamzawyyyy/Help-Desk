@@ -1,1 +1,7 @@
-body { background: #f8f9fa; }
+/* Member 1 — shared styling for every page */
+body { background: #f4f6f9; }
+.card { border: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
+.table td, .table th { vertical-align: middle; }
+.stat-card .display-6 { font-weight: 600; }
+.navbar-text .badge { font-size: .7rem; vertical-align: middle; }
+main h1 { font-weight: 600; }

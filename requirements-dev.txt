@@ -1,0 +1,2 @@
+# Member 5 — extra tools used only for testing and CI
+pytest-cov>=5,<8

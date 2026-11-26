@@ -27,4 +27,6 @@
 </form></section>
 {% endif %}
 <h2 class="h4">Description</h2><div class="border rounded p-3 text-break" style="white-space: pre-wrap">{{ ticket.description }}</div>
+{% include 'workflow/panel.html' ignore missing %}
 {% endblock %}
+

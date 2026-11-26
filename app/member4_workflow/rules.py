@@ -14,7 +14,7 @@ from flask_login import current_user
 from sqlalchemy import event, inspect
 from app import db
 from app.models import Ticket, User
-from .models import TicketHistory
+from .models import Comment, TicketHistory
 
 STATUSES = ("Open", "In Progress", "Resolved")
 TRANSITIONS = {
@@ -23,6 +23,7 @@ TRANSITIONS = {
     "Resolved": ("Open",),   # reopen — delete this line if the team does not want reopening
 }
 STAFF_ROLES = ("support", "admin")
+COMMENT_MAX = 2000
 TRACKED_FIELDS = ("title", "description", "category", "priority", "status", "assigned_to_id")
 
 
@@ -41,6 +42,18 @@ def change_status(ticket, new_status, actor):
         raise WorkflowError(f"A ticket cannot go from {ticket.status} to {new_status or 'nothing'}.")
     ticket.status = new_status
     db.session.commit()   # the listener below records the history line
+
+
+def add_comment(ticket, author, body):
+    body = (body or "").strip()
+    if not body:
+        raise WorkflowError("A comment cannot be empty.")
+    if len(body) > COMMENT_MAX:
+        raise WorkflowError(f"A comment can be at most {COMMENT_MAX} characters.")
+    comment = Comment(ticket_id=ticket.id, author_id=author.id, body=body)
+    db.session.add(comment)
+    db.session.commit()
+    return comment
 
 
 def describe(entry):

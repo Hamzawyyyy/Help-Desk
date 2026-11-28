@@ -26,7 +26,7 @@ for local development only; deployment must supply its own secret and HTTPS.
 
 Tests use temporary SQLite databases. Registration, secure password storage,
 login/logout, duplicate accounts, input validation and CSRF protection are covered.
-GitHub Actions runs tests with Python 3.12 on pushes and pull requests.
+GitHub Actions runs tests with Python 3.12 and 3.13 on pushes and pull requests (see docs/testing.md).
 
 ## Shared integration contract
 
@@ -34,7 +34,8 @@ GitHub Actions runs tests with Python 3.12 on pushes and pull requests.
 - Role values: `user`, `support`, `admin`. Public registration always creates `user`.
 - Flask-Login supplies `current_user`, `login_required` and session handling.
 - All POST forms must include hidden `csrf_token` with the template-provided value.
-- No public role promotion or default staff credentials are provided.
+- Admins change roles on the Users page (`/admin/users`) or with `flask --app run set-role EMAIL ROLE`.
+  `flask --app run seed-demo` creates local demo accounts; there are no built-in credentials.
 - Authentication was implemented as an owner-authorized prerequisite because
   the original foundation had no User model or authentication routes.
   The team should coordinate further authentication work with Member 2.
@@ -70,7 +71,8 @@ Ticket endpoints: `GET /tickets`, `GET /tickets/new`, `POST /tickets/new`, and
 IDs. POSTs require a valid session CSRF token. List queries apply permissions
 before pagination. Templates extend the existing Bootstrap layout.
 
-Comments, status transitions, history, and deployment remain future work.
+Status transitions, comments and change history are provided by Member 4's workflow panel on the ticket page.
+Deployment remains future work.
 Editing and assignment use the existing shared schema; no database migration is needed. Coordinate schema changes with Members 2
 and 4; `init-db` is not a migration system.
 
@@ -96,7 +98,7 @@ acceptance checks and the remaining team requirements.
 Endpoints: `GET/POST /tickets/<id>/edit` and `POST /tickets/<id>/assign`.
 The assignment form sends `assigned_to_id`: an existing support-agent ID, or an
 empty string to unassign. Missing, malformed, nonexistent and non-support IDs
-are rejected. No status transition or activity-history feature is added here.
+are rejected. Status changes and activity history are handled by Member 4's workflow feature.
 
 Manual demo: create a ticket, open its details, select **Edit ticket**, change the
 priority/description, and save. Verify the changes and original creator/status.

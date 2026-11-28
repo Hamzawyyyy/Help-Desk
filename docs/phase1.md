@@ -1,5 +1,14 @@
 # Phase 1 evidence and handover
 
+## Final status — November 28, 2026
+
+All five members' assigned Phase 1 features are merged into `main`:
+Member 2 (#13, #15), Member 4 (#16, #18), Member 1 (#21, #22), Member 5 (#25, #26),
+Member 3 (#5, #7), and the README bug fix (#29). Feature work is recorded in dedicated branches, issues and merged PRs; review records vary by PR. Individual GitHub commit authorship has been verified for all five members.
+
+The final README PR reports 160 passing tests; its GitHub Actions checks passed on Python 3.12 and 3.13 ([run](https://github.com/Hamzawyyyy/Help-Desk/actions/runs/46106983501)).
+Sprint milestones (Sprints 1–4) have been reported by the team. The HelpDesk Phase 1 project board and manual demo rehearsal remain to be verified. Deployment is planned for Phase 2.
+
 ## Scope and ownership
 
 Member 3 requested Ticket Creation & Viewing, with a dedicated feature branch and
@@ -18,7 +27,7 @@ contribution is fabricated.
 - Member 3 Feature 2: [Issue #6](https://github.com/Hamzawyyyy/Help-Desk/issues/6),
   branch `feature/ticket-edit-assign`, [PR #7](https://github.com/Hamzawyyyy/Help-Desk/pull/7).
 - Implementation and tests/documentation are recorded in focused commits.
-- CI uses Python 3.12 and runs on both pushes and PRs.
+- CI now uses Python 3.12 and 3.13 and runs on both pushes and PRs.
 - The repository owner is the final tester. Automated checks and implementation
   self-review do not constitute an independent teammate approval.
 
@@ -53,22 +62,13 @@ Role management and schema migration tooling remain separate team work.
 
 ## Remaining Phase 1 team requirements
 
-- Add the Issues and PRs to a real GitHub Project and maintain its status columns.
-  Project setup was blocked by unavailable CLI authentication and declined browser
-  access during this implementation. Issues alone do not satisfy the Projects rule.
-- Each of the five members must contribute actual code using their own identity.
-  This change alone does not meet the whole-team contribution requirement.
-- Have the owner run the README demo before the Phase 1 evaluation.
+- Verify the linked GitHub Project and its issue/PR statuses.
+- Rehearse the manual demo before evaluation.
+- Individual contributions and assigned feature merges are verified.
 
 ## Later work
 
-Member 3 Feature 2 (editing/assignment) follows merged Feature 1 on its own
-branch and linked PR. Members 1, 2, 4, and 5 should continue
-their agreed responsibilities and avoid duplicating the shared models.
-The Phase 2 requirements for two features per student, comprehensive specifications,
-UML, milestones, Scrum notes, deployment pipeline and live deployment are not claimed
-as completed by this Phase 1 change. No meeting summaries or dates are invented.
-
+Phase 2 includes comprehensive specifications, UML, Scrum records, deployment pipeline and live deployment.
 
 ## November 20 integration session: performed November 21, 2026
 
@@ -108,6 +108,4 @@ before the November 24 target.
 ## November 23 readiness review
 
 See [the readiness snapshot](phase1-readiness.md) for reproducible demo steps,
-verified feature/merge evidence, automated checks, and the remaining November 24
-owner/team checklist tracked in Issue #10. Member 3's completed features do not
-establish overall team Phase 1 completion.
+verified feature/merge evidence, automated checks, and the updated owner/team checklist. See the final status above for current progress.
